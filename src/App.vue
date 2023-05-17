@@ -1,30 +1,39 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <nav class="navbar bg-body-tertiary">
+    <form>
+      <button class="btn btn-outline-success me-2" type="button"><router-link to="/" class="link">Home</router-link></button>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><router-link to="/thanks" class="link">Thanks</router-link></button>
+    </form>
   </nav>
-  <router-view/>
+<router-view/>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style lang="scss" scoped>
+  nav{
+      text-decoration: none;
+      font-size: 20px;
+      form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 40% 10% 10% 40%;
+      }
+      .btn.btn-outline-success.me-2{
+        grid-column-start: 2;
+        grid-column-end: 3;
+        .link{
+          font-size: 24px;
+          color: green;
+          text-decoration: none;
+        }
+      }
+      .btn.btn-sm.btn-outline-secondary{
+        grid-column-start: 3;
+        grid-column-end: 4;
+        .link{
+          font-size: 24px;
+          color: gray;
+          text-decoration: none;
+        }
+      }
+    }
 </style>
