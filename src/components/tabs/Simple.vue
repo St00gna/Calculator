@@ -14,9 +14,16 @@ export default {
         }
     },
     methods: {
-        getResult(){
-            
+        getResult() {  
+            if (this.expression !== '') {
+                this.result = this.expression.replace(/%(\d+(?:\.\d+)?)/g, "*($1/100)");        
+                this.result = eval( this.result );
+            } 
         }
+
+        // getResult(){
+        //     this.result = eval(this.expression) //виконання коду, котрий записанний рядком. Небезпечний варіант але дуже простий (можна вставити безкінечну кількість фільтрів, щоб якось код зробити безпесним для коритувачів та серверу)
+        // }
     },
     computed: {
 
