@@ -20,7 +20,7 @@ export default {
             formData.append('example', fileField.files[0]);
 
             try {
-            const response = await fetch('https://localhost:8080/', {
+            const response = await fetch('http://127.0.0.1:5000/api/process_file', {
                 method: 'POST',
                 body: formData
             });
