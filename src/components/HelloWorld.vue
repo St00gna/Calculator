@@ -1,6 +1,8 @@
 <template>
-  <button @click="this.component = 'Simple'">Simple Calculator</button>
-  <button @click="this.component = 'Advanced'">Amazing imba calculator</button>
+  <div class="nav" style="display: grid; grid-template-columns: repeat(5, 1fr);">
+    <button class="first" style="grid-column-start: 2; grid-column-end: 3; border-radius: 20px; color: violet; border: 3px solid violet; background-color: white;" @click="this.component = 'Simple'">Simple Calculator</button>
+    <button class="second" style="grid-column-start: 4; grid-column-end: 5; border-radius: 20px; color: violet; border: 3px solid violet; background-color: white" @click="this.component = 'Advanced'">Amazing imba calculator</button>
+  </div>
   <keep-alive>
     <component
       :is="this.component"
@@ -28,6 +30,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 
 </style>
