@@ -3,7 +3,7 @@
         <h1>Write expression</h1>
         <input type="text" placeholder="Write" v-model="this.expression"/>
         <button @click="this.getResult">Submit</button>
-        <input v-modbrackets[items]="this.result"/>
+        <input v-model="this.result"/>
     </div>
 </template>
 
@@ -12,22 +12,63 @@ export default {
     data(){
         return{
             expression: "",
-            result: ''
+            result: '',
+            count: 0,
+            i: 0,
+            multiplyAndDivide: 0,
         }
     },
     methods: {
         getResult() {
-            this.result = eval(this.expression)
-            // if(/[a-zа-яё]/i.test(this.expression) == true) {
-            //     alert("Error")
-            //     return
-            // }
-            // if(this.expression.includes('(') == true && his.expression.includes(')') == true) {
-            //     console.log(true)
-            // } else {
-            //     this.expression = this.expression.replaceAll(/\d{1,}.\d{1,}/, /\d{1,} . \d{1,}/)
-            //     console.log(this.expression)
-            // }
+            // this.result = eval(this.expression)
+            if(/[a-zа-яё]/i.test(this.expression) == true) {
+                alert("Error")
+                return
+            }
+            if(this.expression.includes('(') == true && this.expression.includes(')') == true) {
+                this.result = this.expression.replaceAll(' ', '').replaceAll("+", " + ").replaceAll("/", ' / ').replaceAll('*', ' * ').replaceAll('-', ' - ').replaceAll('(', ' ( ').replaceAll(')', ' ) ').split(' ')
+                console.log(this.result)
+                
+            } else {
+                this.result = this.expression.replaceAll(' ', '').replaceAll("+", " + ").replaceAll("/", ' / ').replaceAll('*', ' * ').replaceAll('-', ' - ')
+                console.log(this.result)
+                this.result = this.result.split(' ')
+                console.log(this.result)
+                for(let i=0; i<this.result.length; i++) {
+                    console.log(i)
+                    if(this.result[i] == '*' || this.result[i] == '/') {
+                        let firstNumber = Number(this.result[this.result.indexOf(this.result[i-1])])
+                        let secondNumber = Number(this.result[this.result.indexOf(this.result[i+1])])
+                        if(this.result[i] == '*') {
+                            console.log(this.result)
+                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber * secondNumber)
+                            i=0
+                            console.log('after', this.result)
+                        } else {
+                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber / secondNumber)
+                            i=0
+                            console.log('after', this.result)
+                        }
+                    } 
+                };
+                for(let i=0; i<this.result.length; i++) {
+                    console.log(i)
+                    if(this.result[i] == '+' || this.result[i] == '-') {
+                        let firstNumber = Number(this.result[this.result.indexOf(this.result[i-1])])
+                        let secondNumber = Number(this.result[this.result.indexOf(this.result[i+1])])
+                        if(this.result[i] == '+') {
+                            console.log(this.result)
+                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber + secondNumber)
+                            i=0
+                            console.log('after', this.result)
+                        } else {
+                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber - secondNumber)
+                            i=0
+                            console.log('after', this.result)
+                        }
+                    } 
+                };
+            }
         } 
     },
     computed: {
