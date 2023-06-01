@@ -19,31 +19,31 @@ npm run build
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### For running the server:  
-### You will need Python installed. Recommended version of Python is 3.7 and above.
-### Than, prepare the environment:
+1. You will need Python installed. Recommended version of Python is 3.7 and above.
+2. Than, prepare the environment:
 ```
 python -m venv ./.venv
 ``` 
-### As virtual environment is created for you, enter it and install project dependencies:
+3. As virtual environment is created for you, enter it and install project dependencies:
 ```
 . ./.venv/bin/acticate pip install -r requirements.txt
 ``` 
-### And finally
+4. And finally
 ```
 flask —app app run
 ```
-### For running localhost with front:
-### Install NodeJS
+### For running localhost with front path:
+1. Install NodeJS
 
-### Install Vue CLI
+2. Install Vue CLI
 ```
 npm install -g @vue/cli
 ```
-### Or upgrade it:
+3. Or upgrade it:
 ```
 npm update -g @vue/cli
 ```
-### In your terminal print:
+4. In your terminal print:
 ```
 npm run serve
 ```
