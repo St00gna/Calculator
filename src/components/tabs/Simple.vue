@@ -13,9 +13,8 @@ export default {
         return{
             expression: "",
             result: '',
-            count: 0,
             i: 0,
-            multiplyAndDivide: 0,
+            expressionInBrackets:[],
         }
     },
     methods: {
@@ -25,50 +24,11 @@ export default {
                 alert("Error")
                 return
             }
-            if(this.expression.includes('(') == true && this.expression.includes(')') == true) {
-                this.result = this.expression.replaceAll(' ', '').replaceAll("+", " + ").replaceAll("/", ' / ').replaceAll('*', ' * ').replaceAll('-', ' - ').replaceAll('(', ' ( ').replaceAll(')', ' ) ').split(' ')
-                console.log(this.result)
-                
-            } else {
-                this.result = this.expression.replaceAll(' ', '').replaceAll("+", " + ").replaceAll("/", ' / ').replaceAll('*', ' * ').replaceAll('-', ' - ')
-                console.log(this.result)
-                this.result = this.result.split(' ')
-                console.log(this.result)
-                for(let i=0; i<this.result.length; i++) {
-                    console.log(i)
-                    if(this.result[i] == '*' || this.result[i] == '/') {
-                        let firstNumber = Number(this.result[this.result.indexOf(this.result[i-1])])
-                        let secondNumber = Number(this.result[this.result.indexOf(this.result[i+1])])
-                        if(this.result[i] == '*') {
-                            console.log(this.result)
-                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber * secondNumber)
-                            i=0
-                            console.log('after', this.result)
-                        } else {
-                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber / secondNumber)
-                            i=0
-                            console.log('after', this.result)
-                        }
-                    } 
-                };
-                for(let i=0; i<this.result.length; i++) {
-                    console.log(i)
-                    if(this.result[i] == '+' || this.result[i] == '-') {
-                        let firstNumber = Number(this.result[this.result.indexOf(this.result[i-1])])
-                        let secondNumber = Number(this.result[this.result.indexOf(this.result[i+1])])
-                        if(this.result[i] == '+') {
-                            console.log(this.result)
-                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber + secondNumber)
-                            i=0
-                            console.log('after', this.result)
-                        } else {
-                            this.result.splice(this.result.indexOf(this.result[i-1]), 3, firstNumber - secondNumber)
-                            i=0
-                            console.log('after', this.result)
-                        }
-                    } 
-                };
-            }
+            this.result =  this.expression.replaceAll(' ', '').replaceAll('+', ' + ').replaceAll('*', ' * ').replaceAll('-', ' -').replaceAll('/', ' / ').split(' ')
+            let calc = document.createElement('calc');
+            calc.style['opacity'] = `calc(${this.result.join(' ')})`;
+            this.result = parseFloat(calc.style['opacity'].replace('calc(', '').replace(')', ''))
+            calc.remove();
         } 
     },
     computed: {
