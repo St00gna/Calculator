@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from calculator import calculator
 from files import check_file_format

@@ -2,7 +2,6 @@ import docx2txt
 import pdfminer.high_level
 
 
-
 def read_txt(filepath: str) -> str:
     with open(filepath, 'r') as text_file:
         text = text_file.read()
@@ -21,8 +20,6 @@ def read_pdf(filepath: str) -> str:
     return text
 
 
-
-
 def check_file_format(filepath: str) -> str:
     if filepath.endswith(".txt"):
         text = read_txt(filepath)
@@ -33,6 +30,3 @@ def check_file_format(filepath: str) -> str:
     else:
         return "Wrong file path or Invalid format (valid formats are txt, docx, pdf)"
     return text
-
-
-

@@ -2,15 +2,10 @@ import re
 from typing import Union
 
 
-
-
-    # Функція для обчислення виразів без дужок
 def evaluate(expression: str) -> Union[int, float, str]:
 
-        # Розділяємо по операціям
     values = re.findall(r'\d+(?:\.\d+)?|[-+*/]', expression)
 
-        # Превіряємо чи довший за 2 елементи, якщо так, то переводимо у числові дані та обчислюємо, а якщо ні повертаємо значення
     if len(values) >= 3:
         for i in range(len(values)):
             is_num = bool(re.match(r'^-?\d+(\.\d+)?$', values[i]))
@@ -28,7 +23,6 @@ def evaluate(expression: str) -> Union[int, float, str]:
                 elif values[i] == '-':
                     values[i] = '+'
 
-            # Виконуємо операції в порядку їх пріорітету
         try:
             while '*' in values or '/' in values:
                 for i in range(len(values)):
@@ -41,7 +35,6 @@ def evaluate(expression: str) -> Union[int, float, str]:
                         del values[i:i+2]
                         break
 
-                # Виконуємо операції додавання та віднімання
             result = values[0]
             for i in range(1, len(values), 2):
                 if values[i] == '+':
@@ -60,9 +53,6 @@ def evaluate(expression: str) -> Union[int, float, str]:
     else:
         result = expression
 
-
-
-        # Переводимо результат у числовий формат
     if '.' in str(result) and str(result)[-1] == '0':
         return int(float(result))
     elif '.' not in str(result):
@@ -103,29 +93,22 @@ def check_result(result_from_parentheses: Union[int, str], open_index: int, clos
     return new_expression
 
 
-    # Функція для обробки дужок та обчислення виразів у них
 def calculator(expression: str) -> Union[int, float, str]:
-        # Знаходимо першу закриваючу дужку
+
     close_index = expression.find(')')
 
-        # Знаходимо останню відкриваючу дужку перед закриваючою
     open_index = expression.rfind('(', 0, close_index)
 
     if close_index == -1 and open_index == -1:
-            # Якщо немає закриваючої дужки, обчислюємо весь вираз
+
         return evaluate(expression)
 
     elif close_index == -1 or open_index == -1:
         return 'Value Error. Invalid expression'
 
-
-        # Обчислюємо вираз у дужках та замінюємо його на результат
     sub_expression = expression[open_index + 1:close_index]
     result_from_parentheses = evaluate(sub_expression)
 
     new_expression = check_result(result_from_parentheses, open_index, close_index, expression)
-        # Рекурсивно обробляємо решту виразу
+
     return calculator(new_expression)
-
-    # Обробляємо вирази у дужках та повертаємо результат
-

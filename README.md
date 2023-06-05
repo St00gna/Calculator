@@ -22,12 +22,21 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 1. You will need Python installed. Recommended version of Python is 3.7 and above.
 2. Than, prepare the environment:
 ```
-python -m venv ./.venv
+python -m venv venv
 ``` 
-3. As virtual environment is created for you, enter it and install project dependencies:
+3. As virtual environment is created for you, activate it:  
+For Windows PowerShell
 ```
-. ./.venv/bin/acticate pip install -r requirements.txt
+.\venv\Scripts\Activate.ps1
+```
+For Linux or macOS
+```
+venv/bin/acticate
 ``` 
+Install project dependencies:
+```
+pip install -r requirements.txt
+```
 4. And finally
 ```
 flask —app app run
