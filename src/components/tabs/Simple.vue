@@ -12,20 +12,24 @@ export default {
     data(){
         return{
             expression: "",
-            result: ''
+            result: '',
+            i: 0,
+            expressionInBrackets:[],
         }
     },
     methods: {
-        getResult() {  
-            if (this.expression !== '') {
-                this.result = this.expression.replace(/%(\d+(?:\.\d+)?)/g, "*($1/100)");        
-                this.result = eval( this.result );
-            } 
-        }
-
-        // getResult(){
-        //     this.result = eval(this.expression) //виконання коду, котрий записанний рядком. Небезпечний варіант але дуже простий (можна вставити безкінечну кількість фільтрів, щоб якось код зробити безпесним для коритувачів та серверу)
-        // }
+        getResult() {
+            // this.result = eval(this.expression)
+            if(/[a-zа-яё]/i.test(this.expression) == true) {
+                alert("Error")
+                return
+            }
+            this.result =  this.expression.replaceAll(' ', '').replaceAll('+', ' + ').replaceAll('*', ' * ').replaceAll('-', ' -').replaceAll('/', ' / ').split(' ')
+            let calc = document.createElement('calc');
+            calc.style['opacity'] = `calc(${this.result.join(' ')})`;
+            this.result = parseFloat(calc.style['opacity'].replace('calc(', '').replace(')', ''))
+            calc.remove();
+        } 
     },
     computed: {
 
